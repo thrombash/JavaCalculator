@@ -31,7 +31,7 @@ public class Main {
             num2 = Integer.parseInt(operands[1]);
             isRoman = false;
         }
-        else throw new Exception("Чимла должны быть одного формата");
+        else throw new Exception("Числа должны быть одного формата");
         if (num1 > 10 || num2 > 10) {
             throw new Exception("Числа должны быть от 1 до 10");
         }
@@ -55,17 +55,22 @@ public class Main {
         else return null;
     }
 
-    static int calc(int a, int b, String operand) {
+    static int calc(int a, int b, String operand) throws Exception {
         if (operand.equals("+")) return a + b;
-        else if (operand.equals("-")) return a - b;
-        else if (operand.equals("*")) return a * b;
-        else if (operand.equals("/")) return a / b;
+        if (operand.equals("-")) return a - b;
+        if (operand.equals("*")) return a * b;
+        if (operand.equals("/")) {
+            if (b != 0) {
+                return a / b;
+            }
+            else throw new Exception("Деление на ноль!");
+        }
         else return 0;
     }
 }
 
 class Roman {
-    static String[] romanArray = new String[] {"0", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI",
+    static String[] romanArray = new String[] {"-", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI",
             "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV",
             "XXVI", "XXVII", "XXVIII", "XXIX", "XXX"};
     public static boolean isRoman(String val) {
